@@ -1,7 +1,8 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import os
 import sys
+import pymysql
+from models import User  # temporary for migration
 from dotenv import load_dotenv
 
 # =======================================
@@ -40,12 +41,18 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # =================================
 # Initialize & Apply Extensions
 # =================================
+from flask_migrate import Migrate
+from db_connect import db
 
-db = SQLAlchemy()
+db_migration = Migrate()
 db.init_app(app)
+db_migration.init_app(app, db)
+print("migration added")
 
 
-# example get request
+# =================================
+# Routes (Temp)
+# =================================
 @app.route("/")
 def index():
     return "Hello World!"
