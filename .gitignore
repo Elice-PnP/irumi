@@ -41,3 +41,6 @@ __pycache__/
 flask-server/instance/*.db
 flask-server/instance/*.log
 flask-server/instance/*.log*
+
+# env file
+.env
