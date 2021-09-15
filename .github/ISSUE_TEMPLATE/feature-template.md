@@ -12,8 +12,8 @@ assignees: ''
 - Priority:
 
 ## Requirements
-- [ ] Task 1
-- [ ] Task 2
+- [ ] 
+- [ ] 
 
 ## Estimated Time
 `hrs`
