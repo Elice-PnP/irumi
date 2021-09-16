@@ -8,11 +8,10 @@ assignees: ''
 ---
 
 # Feature
-- Page:
-- Priority:
+- Page: ``
+- Priority: ``
 
 ## Requirements
-- [ ] 
 - [ ] 
 
 ## Estimated Time
