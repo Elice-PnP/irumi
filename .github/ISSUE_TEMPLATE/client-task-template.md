@@ -14,7 +14,6 @@ assignees: ''
 
 ## Todo
 - [ ]
-- [ ]
 
 ## Estimated Time
 `hrs`
