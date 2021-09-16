@@ -13,6 +13,8 @@ env_variables = {
     "DB_NAME": os.getenv("DATABASE_NAME"),
     "DB_HOST": os.getenv("DATABASE_HOST"),
     "DB_USER": os.getenv("DATABASE_USER"),
+    "DB_PORT": os.getenv("DATABASE_PORT"),
+    "DB_PWD": os.getenv("DATABASE_PASSWORD"),
 }
 
 # Check all required env variables are set.
@@ -29,12 +31,10 @@ for key, val in env_variables.items():
 
 app = Flask(__name__)
 
+SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{env_variables['DB_USER']}:{env_variables['DB_PWD']}@{env_variables['DB_HOST']}:{env_variables['DB_PORT']}/{env_variables['DB_NAME']}"
 
 # Configure Database
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = f"mysql+pymysql://root:{env_variables['DB_USER']}@{env_variables['DB_HOST']}/{env_variables['DB_NAME']}"
-
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
