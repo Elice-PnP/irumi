@@ -44,3 +44,5 @@ flask-server/instance/*.log*
 
 # env file
 .env
+server/migrations/
+server/project/views/
