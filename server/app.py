@@ -56,3 +56,7 @@ print("migration added")
 @app.route("/")
 def index():
     return "Hello World!"
+
+from project.views import register_view
+
+app.register_blueprint(register_view.bp)
