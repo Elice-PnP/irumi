@@ -27,4 +27,4 @@ class User(db.Model):
         self.email = email
         self.password = password  # temp!
         self.name = name
-        self.nickname =nickname
+        self.nickname = nickname
