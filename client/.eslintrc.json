@@ -19,5 +19,13 @@
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*Slice.js"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }
