@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { createSlice } from "@reduxjs/toolkit";
 import * as userAPI from "../api/userAPI";
 
