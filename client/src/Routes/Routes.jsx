@@ -1,8 +1,14 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch, Link } from "react-router-dom";
+
+import TopBar from "../Components/TopBar/TopBar";
 
 export default function Routes() {
 
   return (
-    <BrowserRouter>
-    </BrowserRouter>
-  );
+    <div>
+      <BrowserRouter>
+        <TopBar/>
+      </BrowserRouter>
+    </div>  
+  )
+}
