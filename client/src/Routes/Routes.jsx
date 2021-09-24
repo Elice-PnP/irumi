@@ -1,8 +1,5 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 export default function Routes() {
-
-  return (
-    <BrowserRouter>
-    </BrowserRouter>
-  );
+  return <BrowserRouter></BrowserRouter>;
+}
