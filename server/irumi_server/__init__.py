@@ -65,7 +65,5 @@ def create_app():
 
     # 비밀번호 암호화
     app.secret_key = 'afsfsa'
-    # # 세션 일정시간 서버 저장파일
-    # app.config["SESSION_TYPE"] = "filesystem"
 
     return app
