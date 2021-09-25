@@ -1,9 +1,9 @@
 from flask import Flask
 import os
 import sys
+from flask.globals import current_app
 import pymysql
 from sqlalchemy.exc import IntegrityError
-from models import User  # temporary for migration
 from dotenv import load_dotenv
 
 # =======================================
@@ -44,12 +44,21 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # =================================
 from flask_migrate import Migrate
 from db_connect import db
+from flask_login import LoginManager
 
 db_migration = Migrate()
 db.init_app(app)
 db_migration.init_app(app, db)
 print("migration added")
 
+# =================================
+# Initialization to use flask-login
+# =================================
+app.secret_key = os.urandom(24)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+from models import User  # temporary for migration
 
 # =================================
 # Routes (Temp)
@@ -57,32 +66,30 @@ print("migration added")
 from flask import request, jsonify
 from flask_login import login_user, current_user, login_required, logout_user
 
-
 @app.route("/")
 def index():
     return "Hello World!"
 
-@app.route('/users', methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def register():
     try:
         user_data = request.json
-
-        print('user_data: ' ,user_data)
-        print('user_data.get("email"): ' ,user_data.get("email"))
 
         new_user = User(
             user_data.get("email"), 
             user_data.get("password"), 
             user_data.get("name"), 
-            user_data.get("nickname")
         )
-        print('new_user: ' ,new_user)
-
+        nickname = user_data.get("nickname")
+        if nickname:
+            new_user.nickname = nickname
+            
         db.session.add(new_user)
         db.session.commit()
 
         # log the user in straight away and send user data.
         login_user(new_user)
+
         return jsonify(
             {
                 "id": current_user.id,
@@ -94,18 +101,30 @@ def register():
     except IntegrityError:
         db.session.rollback()
         return "Existing user.", 401
-    # except:
-    #     db.session.rollback()
-    #     return "Failed registration.", 500
-    except Exception as e:
-        print(e)
+    except:
+        db.session.rollback()
+        return "Failed registration.", 500
+
 
 # Login user
 @app.route("/login", methods=["POST"])
 def login():
-    #Check already logged in
-
     login_data = request.json
     user = User.query.filter_by(email=login_data.get("email")).first()
+    if user and user.is_password_correct(login_data.get("password")):
+        # valid credentials - log in user
+        login_user(user, remember=True)
+        return {
+            "id": current_user.id,
+            "email": current_user.email,
+            "name": current_user.name,
+            "nickname": current_user.nickname
+        }
 
-    return login_data
+    return jsonify({"result": 0, "message": "invalid credentials"}), 401
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return jsonify({"result": 1, "message": "logout success"})

@@ -1,5 +1,4 @@
 from db_connect import db
-from flask_bcrypt import Bcrypt
 
 
 class User(db.Model):
@@ -24,15 +23,31 @@ class User(db.Model):
     nickname = db.Column(db.String(100), nullable=True)
     photofileImg = db.Column(db.String(255))
 
-    def __init__(self, email: str, password: str, name: str, nickname: str):
+    def __init__(self, email: str, password: str, name: str):
         self.email = email
-        self.password_hashed = bcrypt.generate_password_hash(password)  # temp!
+        # self.password_hashed = bcrypt.generate_password_hash(password)  # temp!
+        self.password_hashed = password
         self.name = name
-        self.nickname = nickname
 
     def is_password_correct(self, password: str):
-        return bcrypt.check_password_hash(self.password_hashed, password)
+        # return bcrypt.check_password_hash(self.password_hashed, password)
+        return self.password_hashed == password
     
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
     def to_dict(self):
         return {
             "id": self.id,
