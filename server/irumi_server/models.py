@@ -1,5 +1,4 @@
-from db_connect import db
-
+from irumi_server import db, bcrypt
 
 class User(db.Model):
     """
@@ -25,13 +24,13 @@ class User(db.Model):
 
     def __init__(self, email: str, password: str, name: str):
         self.email = email
-        # self.password_hashed = bcrypt.generate_password_hash(password)  # temp!
-        self.password_hashed = password
+        self.password_hashed = bcrypt.generate_password_hash(password)  # temp!
+        # self.password_hashed = password
         self.name = name
 
     def is_password_correct(self, password: str):
-        # return bcrypt.check_password_hash(self.password_hashed, password)
-        return self.password_hashed == password
+        return bcrypt.check_password_hash(self.password_hashed, password)
+        # return self.password_hashed == password
     
     @property
     def is_authenticated(self):
