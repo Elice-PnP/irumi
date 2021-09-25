@@ -2,6 +2,7 @@ from flask import Flask
 import os
 import sys
 import pymysql
+from sqlalchemy.exc import IntegrityError
 from models import User  # temporary for migration
 from dotenv import load_dotenv
 
@@ -53,6 +54,58 @@ print("migration added")
 # =================================
 # Routes (Temp)
 # =================================
+from flask import request, jsonify
+from flask_login import login_user, current_user, login_required, logout_user
+
+
 @app.route("/")
 def index():
     return "Hello World!"
+
+@app.route('/users', methods=['POST'])
+def register():
+    try:
+        user_data = request.json
+
+        print('user_data: ' ,user_data)
+        print('user_data.get("email"): ' ,user_data.get("email"))
+
+        new_user = User(
+            user_data.get("email"), 
+            user_data.get("password"), 
+            user_data.get("name"), 
+            user_data.get("nickname")
+        )
+        print('new_user: ' ,new_user)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        # log the user in straight away and send user data.
+        login_user(new_user)
+        return jsonify(
+            {
+                "id": current_user.id,
+                "email": current_user.email,
+                "name": current_user.name,
+                "nickname": current_user.nickname,
+            }
+        )
+    except IntegrityError:
+        db.session.rollback()
+        return "Existing user.", 401
+    # except:
+    #     db.session.rollback()
+    #     return "Failed registration.", 500
+    except Exception as e:
+        print(e)
+
+# Login user
+@app.route("/login", methods=["POST"])
+def login():
+    #Check already logged in
+
+    login_data = request.json
+    user = User.query.filter_by(email=login_data.get("email")).first()
+
+    return login_data
