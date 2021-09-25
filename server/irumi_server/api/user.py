@@ -61,14 +61,12 @@ def login():
             "nickname": current_user.nickname
         }
 
-    return jsonify({"result": 0, "message": "invalid credentials"}), 401
+    return "invalid credentials", 401
 
 # Logout user
 @bp.route("/logout")
 @login_required
 def logout():
-    try:
-        logout_user()
-        return jsonify({"result": 1, "message": "logout success"})
-    except Exception as e:
-        print(e)
+    user_id = current_user.id
+    logout_user()
+    return jsonify({"id": user_id})
