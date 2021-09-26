@@ -17,16 +17,16 @@ export const fetchWeeklyAgenda = createAsyncThunk(
   }
 );
 
-export const toggleTodo = (weekdayNum, todoId) => {
-  return async (dispatch) => {
-    try {
-      await weeklyAgendaAPI.toggleTodo(todoId);
-      dispatch(todoToggled(weekdayNum, todoId));
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-};
+// export const toggleTodo = (weekdayNum, todoId) => {
+//   return async (dispatch) => {
+//     try {
+//       await weeklyAgendaAPI.toggleTodo(todoId);
+//       dispatch(todoToggled(weekdayNum, todoId));
+//     } catch (err) {
+//       console.log(err.message);
+//     }
+//   };
+// };
 
 const weeklyAgendaSlice = createSlice({
   name: "weeklyAgenda",
