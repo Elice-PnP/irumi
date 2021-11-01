@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Navigation from "./Navigation";
 
 export default function TopBar() {
   const [user, setUser] = useState(1);
+  let testvar;
 
   return (
     <Container>
@@ -13,10 +14,10 @@ export default function TopBar() {
           햄버거
           {/* <img className="hamburger" alt="hamburger" src="hamburger.png" /> */}
         </div>
-        {user ? <Navigation /> : <></> }
+        {user ? <Navigation /> : <></>}
       </Contents>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -26,7 +27,7 @@ const Container = styled.div`
   width: 100%;
   height: 80px;
   background-color: #dde0ea;
-`
+`;
 
 const Contents = styled.div`
   display: flex;
@@ -36,5 +37,4 @@ const Contents = styled.div`
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;
-`
-
+`;
