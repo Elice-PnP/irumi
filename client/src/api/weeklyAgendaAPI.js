@@ -6,5 +6,5 @@ export const fetchAgenda = async (date) => {
 };
 
 export const toggleTodo = async () => {
-  return "hello";
+  return "hello!";
 };
