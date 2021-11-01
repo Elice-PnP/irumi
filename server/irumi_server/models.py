@@ -1,6 +1,4 @@
-from db_connect import db
-from . import bcrypt
-
+from irumi_server import db, bcrypt
 
 class User(db.Model):
     """
@@ -21,17 +19,34 @@ class User(db.Model):
     )  # user id must be unique
     name = db.Column(db.String(100), nullable=False)
     password_hashed = db.Column(db.String(100), nullable=False)
-    nickname = db.Column(db.String(100), nullable=False)
+    nickname = db.Column(db.String(100), nullable=True)
     photofileImg = db.Column(db.String(255))
 
     def __init__(self, email: str, password: str, name: str):
         self.email = email
         self.password_hashed = bcrypt.generate_password_hash(password)  # temp!
+        # self.password_hashed = password
         self.name = name
 
     def is_password_correct(self, password: str):
         return bcrypt.check_password_hash(self.password_hashed, password)
+        # return self.password_hashed == password
     
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
     def to_dict(self):
         return {
             "id": self.id,
