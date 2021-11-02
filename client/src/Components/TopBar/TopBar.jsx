@@ -1,15 +1,14 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Nav from "react-bootstrap/Nav";
+import PropTypes from "prop-types";
 
-export default function TopBar() {
+export default function TopBar({ NavButtons }) {
   return (
     <Navbar bg="dark" variant="dark" expand={false}>
-      <Navbar.Toggle aria-controls="offcanvasNavbar" />
-      <Container>
+      <LeftDiv>
+        <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Brand href="#home">
           <img
             alt=""
@@ -20,7 +19,7 @@ export default function TopBar() {
           />{" "}
           IRUMI
         </Navbar.Brand>
-      </Container>
+      </LeftDiv>
       <Navbar.Offcanvas
         id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel"
@@ -40,3 +39,13 @@ export default function TopBar() {
     </Navbar>
   );
 }
+
+TopBar.propTypes = {
+  NavButtons: PropTypes.arrayOf(PropTypes.element),
+};
+
+const LeftDiv = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+`;

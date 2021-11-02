@@ -3,7 +3,7 @@ import TopBar from "./TopBar/TopBar";
 import MainTabBar from "./MainTabBar/MainTabBar";
 import PropTypes from "prop-types";
 
-const CommonPageLayout = ({ children }) => {
+const CommonPageLayout = ({ children, currentTab, NavButtons }) => {
   return (
     <Container>
       <header>
@@ -11,24 +11,26 @@ const CommonPageLayout = ({ children }) => {
       </header>
       <main>{children}</main>
       <footer>
-        <MainTabBar />
+        {currentTab >= 0 && <MainTabBar currentTab={currentTab} />}
       </footer>
     </Container>
   );
 };
 
+CommonPageLayout.defaultProps = {
+  currentTab: -1,
+};
+
 CommonPageLayout.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.any,
+  currentTab: PropTypes.number,
+  NavButtons: PropTypes.arrayOf(PropTypes.element),
 };
 
 const Container = styled.div`
-  background-color: pink;
+  background-color: #ffff;
   height: 100vh;
-`;
-
-const BarContainer = styled.div`
-  position: fixed;
-  bottom: 0px;
+  width: 100%;
 `;
 
 export default CommonPageLayout;
