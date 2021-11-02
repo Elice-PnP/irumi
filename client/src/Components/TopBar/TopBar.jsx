@@ -1,40 +1,42 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-import Navigation from "./Navigation";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Nav from "react-bootstrap/Nav";
 
 export default function TopBar() {
-  const [user, setUser] = useState(1);
-  let testvar;
-
   return (
-    <Container>
-      <Contents>
-        <div>
-          햄버거
-          {/* <img className="hamburger" alt="hamburger" src="hamburger.png" /> */}
-        </div>
-        {user ? <Navigation /> : <></>}
-      </Contents>
-    </Container>
+    <Navbar bg="dark" variant="dark" expand={false}>
+      <Navbar.Toggle aria-controls="offcanvasNavbar" />
+      <Container>
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src="/logo192.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{" "}
+          IRUMI
+        </Navbar.Brand>
+      </Container>
+      <Navbar.Offcanvas
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+        placement="start"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title id="offcanvasNavbarLabel">사이드바</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="justify-content-end flex-grow-1 pe-3">
+            <Nav.Link href="#action1">설정</Nav.Link>
+            <Nav.Link href="#action2">로그아웃</Nav.Link>
+            <Nav.Link href="#action2">About Irumi</Nav.Link>
+          </Nav>
+        </Offcanvas.Body>
+      </Navbar.Offcanvas>
+    </Navbar>
   );
 }
-
-const Container = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 80px;
-  background-color: #dde0ea;
-`;
-
-const Contents = styled.div`
-  display: flex;
-  width: 96%;
-  max-width: 3000px;
-  height: 100%;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: space-between;
-`;
