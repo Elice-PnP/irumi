@@ -3,11 +3,11 @@ import TopBar from "./TopBar/TopBar";
 import MainTabBar from "./MainTabBar/MainTabBar";
 import PropTypes from "prop-types";
 
-const CommonPageLayout = ({ children, currentTab, NavButtons }) => {
+const CommonPageLayout = ({ children, currentTab, navLinks }) => {
   return (
     <Container>
       <header>
-        <TopBar />
+        <TopBar navLinks={navLinks} />
       </header>
       <main>{children}</main>
       <footer>
@@ -24,7 +24,12 @@ CommonPageLayout.defaultProps = {
 CommonPageLayout.propTypes = {
   children: PropTypes.any,
   currentTab: PropTypes.number,
-  NavButtons: PropTypes.arrayOf(PropTypes.element),
+  navLinks: PropTypes.arrayOf(
+    PropTypes.exact({
+      name: PropTypes.string,
+      route: PropTypes.string,
+    })
+  ),
 };
 
 const Container = styled.div`

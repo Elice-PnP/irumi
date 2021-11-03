@@ -3,11 +3,21 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Nav from "react-bootstrap/Nav";
 import PropTypes from "prop-types";
+import { LinkContainer } from "react-router-bootstrap";
+import Button from "react-bootstrap/Button";
 
-export default function TopBar({ NavButtons }) {
+export default function TopBar({ navLinks }) {
+  const linksToAdd =
+    navLinks &&
+    navLinks.map((navLink) => (
+      <LinkContainer key={navLink.name} to={navLink.route}>
+        <Button>{navLink.name}</Button>
+      </LinkContainer>
+    ));
+
   return (
     <Navbar bg="dark" variant="dark" expand={false}>
-      <LeftDiv>
+      <NavGroup>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Brand href="#home">
           <img
@@ -19,7 +29,8 @@ export default function TopBar({ NavButtons }) {
           />{" "}
           IRUMI
         </Navbar.Brand>
-      </LeftDiv>
+      </NavGroup>
+      <NavGroup>{linksToAdd}</NavGroup>
       <Navbar.Offcanvas
         id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel"
@@ -41,11 +52,16 @@ export default function TopBar({ NavButtons }) {
 }
 
 TopBar.propTypes = {
-  NavButtons: PropTypes.arrayOf(PropTypes.element),
+  navLinks: PropTypes.arrayOf(
+    PropTypes.exact({
+      name: PropTypes.string,
+      route: PropTypes.string,
+    })
+  ),
 };
 
-const LeftDiv = styled.div`
+const NavGroup = styled.div`
   display: flex;
   gap: 10px;
-  margin-left: 10px;
+  margin: 0 20px 0 20px;
 `;

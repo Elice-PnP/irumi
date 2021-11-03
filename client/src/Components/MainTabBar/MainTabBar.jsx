@@ -1,20 +1,32 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Tab } from "bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function MainTabBar({ currentTab }) {
-  const buttons = ["목표", "노트", "그룹"];
+  const buttons = [
+    {
+      name: "목표",
+      route: "/goals",
+    },
+    {
+      name: "노트",
+      route: "/notes",
+    },
+    {
+      name: "그룹",
+      route: "/groups",
+    },
+  ];
 
   return (
     <BarContainer>
       <StyledButtonGroup>
         {buttons.map((tab, index) => (
-          <TabButton
-            key={tab}
-            className={currentTab === index ? "isSelected" : ""}
-          >
-            {tab}
-          </TabButton>
+          <LinkContainer key={tab.name} to={tab.route}>
+            <TabButton className={currentTab === index ? "isSelected" : ""}>
+              {tab.name}
+            </TabButton>
+          </LinkContainer>
         ))}
       </StyledButtonGroup>
     </BarContainer>
