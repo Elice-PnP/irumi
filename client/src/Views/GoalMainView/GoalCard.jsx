@@ -24,10 +24,10 @@ function GoalCard({ progress, goal, object, type }) {
   return (
     <CardWrapper>
       <ProgressWrapper>
-        <div className="percentage">
+        <div className="percentageSection">
           {Math.floor((currentProgress / goal) * 100)}%
         </div>
-        <div className="progress">
+        <div className="progressSection">
           {currentProgress} / {goal}
           {type}
         </div>
@@ -52,9 +52,9 @@ const ProgressWrapper = styled.div`
   flex: 1;
   flex-direction: column;
   align-items: center;
-  .percentage {
+  .percentageSection {
   }
-  .progress {
+  .progressSection {
     font-size: 0.7rem;
   }
 `;

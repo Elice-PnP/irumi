@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import Calendar from "./Calendar";
-import Todo from "./Todo";
-import Goal from "./Goal";
+import CalendarSection from "./CalendarSection";
+import TodoSection from "./TodoSection";
+import GoalSection from "./GoalSection";
+import CommonPageLayout from "../../Components/CommonPageLayout";
 
 function GoalMainView() {
   return (
-    <GoalMainWrapper>
-      <Calendar />
-      <Goal />
-      <Todo />
-    </GoalMainWrapper>
+    <CommonPageLayout currentTab={0}>
+      <GoalMainWrapper>
+        <CalendarSection />
+        <GoalSection />
+        <TodoSection />
+      </GoalMainWrapper>
+    </CommonPageLayout>
   );
 }
 

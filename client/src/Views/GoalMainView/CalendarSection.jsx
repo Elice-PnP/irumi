@@ -7,7 +7,7 @@ import ko from "date-fns/locale/ko";
 
 registerLocale("ko", ko);
 
-function Calendar() {
+function CalendarSection() {
   const [date, setDate] = useState(new Date());
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   const handleClickDate = (dateToChange) => {
@@ -115,14 +115,13 @@ const CalendarColumn = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  gap: 5px;
   cursor: pointer;
   :hover {
     .background {
       position: absolute;
       z-index: -1;
-      bottom: 0px;
-      border: 13px solid lightgray;
+      bottom: 4px;
+      border: 12px solid lightgray;
       border-radius: 50%;
     }
   }
@@ -150,8 +149,8 @@ const CalendarColumn = styled.div`
     .background {
       position: absolute;
       z-index: -1;
-      bottom: 0px;
-      border: 13px solid red;
+      bottom: 4px;
+      border: 12px solid red;
       border-radius: 50%;
     }
   }
@@ -160,4 +159,4 @@ const CalendarIcon = styled(CalendarAlt)`
   cursor: pointer;
 `;
 
-export default Calendar;
+export default CalendarSection;

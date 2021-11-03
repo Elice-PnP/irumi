@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import GoalCard from "./GoalCard";
 
-function Goal() {
+function GoalSection() {
   return (
     <GoalWrapper>
       <SectionWrapper>
@@ -49,4 +49,4 @@ const TaskContainer = styled.div`
   gap: 10px;
 `;
 
-export default Goal;
+export default GoalSection;

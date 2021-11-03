@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { PlusCircleOutline } from "@styled-icons/evaicons-outline";
 import TodoCard from "./TodoCard";
 
-function Todo() {
+function TodoSection() {
   const [taskList, setTastList] = useState([
     { title: "우유사기", done: true },
     { title: "테스트 보기", done: false },
@@ -57,6 +57,7 @@ const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 80px;
 `;
 
-export default Todo;
+export default TodoSection;
