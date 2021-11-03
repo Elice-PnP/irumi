@@ -38,7 +38,7 @@ MainTabBar.propTypes = {
 };
 
 const BarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   width: 100%;
 `;

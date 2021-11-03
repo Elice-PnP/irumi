@@ -4,6 +4,7 @@ import LoginView from "../Views/LoginView/LoginView";
 import TestPage from "../Views/TestPage";
 import NoteMainPage from "../Views/NoteMainView/NoteMainPage";
 import GroupMainPage from "../Views/GroupMainView/GroupMainPage";
+import GoalMainView from "../Views/GoalMainView/GoalMainView";
 
 export default function Routes() {
   return (
@@ -17,7 +18,7 @@ export default function Routes() {
         </Route>
         <Route path="/">
           {/* goal main page */}
-          <TestPage />
+          <GoalMainView />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -33,7 +33,6 @@ CommonPageLayout.propTypes = {
 };
 
 const Container = styled.div`
-  background-color: #ffff;
   height: 100vh;
   width: 100%;
 `;
