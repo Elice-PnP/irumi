@@ -1,4 +1,5 @@
 from irumi_server import db, bcrypt
+from datetime import date
 
 class User(db.Model):
     """
@@ -78,7 +79,34 @@ class Goals(db.Model):
     target = db.Column(db.Integer, nullable=False)
     period_type = db.Column(db.Integer, db.ForeignKey("goal_period_types.id"), nullable=False)
     start_date = db.Column(db.DateTime, nullable=False) 
-    end_date = db.Column(db.DateTime, nullable=True) 
+    end_date = db.Column(db.DateTime, nullable=True)
+
+    def __init__(
+        self, 
+        user_id: int, 
+        title: str, 
+        type: int, 
+        target: int, 
+        period_type: int, 
+        start_date: date
+    ):
+        self.user_id = user_id
+        self.title = title
+        self.type = type
+        self.target = target
+        self.period_type = period_type
+        self.start_date = start_date
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "type": self.type,
+            "target": self.target,
+            "period_type": self.period_type,
+            "start_date": self.start_date,
+            "end_date": self.end_date
+        }
 
 
 class GoalTypes(db.Model):

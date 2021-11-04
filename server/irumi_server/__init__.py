@@ -56,12 +56,15 @@ def create_app():
     print("migration added")
 
     from .api import user
+    from .api import goal
+
     from irumi_server.models import User
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
     app.register_blueprint(user.bp)
+    app.register_blueprint(goal.bp)
 
     # 비밀번호 암호화
     app.secret_key = 'afsfsa'
